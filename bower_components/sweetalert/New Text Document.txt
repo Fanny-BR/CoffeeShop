@@ -1,0 +1,50 @@
+  <?php
+    //Login untuk admin jika ada tombol login ditekan
+          if (isset($_POST["login"])) 
+          {
+            $username = sha1($_POST["Username"]);
+            $password = sha1($_POST["Password"]);
+      //lakukan query cek akun admin , apakah ada?
+            $ambil = $koneksi->query("SELECT * FROM admin WHERE Username='$username' AND Password='$password'");
+      //menghitung akun yang ter-ambil
+            $akunyangcocok = $ambil->num_rows;
+
+      //jika 1 akun yang cocok maka bisa login
+            if ($akunyangcocok==1) 
+            {
+      //mendapatkan akun dalam bentuk array
+              $akun = $ambil->fetch_assoc();
+      //simpan session admin 
+              $_SESSION["admin"] = $akun;
+              echo "<script>
+
+              swal(
+              'Login Berhasil',
+              '',
+              'success'
+              )
+
+              </script>";
+              echo "<meta http-equiv='refresh' content='1;url=index.php?halaman=semua_data'>";
+            }
+            else
+            {
+              echo "<script>swal({
+                type: 'error',
+                title: 'Login Gagal',
+                text: 'Email atau password Anda Salah',
+                footer: '<a href>Perlu Bantuan?</a>'
+              })</script>";
+
+            }
+          }
+          ?>
+
+
+
+
+
+
+
+
+  <link href="sweetalert/sweetalert2.min.css" rel="stylesheet"/>

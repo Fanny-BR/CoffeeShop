@@ -1,0 +1,9 @@
+{
+    "name": "ros/ezpdf",
+    "description": "Porting of the well-known R&OS PDF class.",
+    "license": "MIT",
+    "autoload": {
+        "classmap": ["src/"]
+    },
+    "version": "0.12.1"
+}
